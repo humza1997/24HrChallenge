@@ -6,7 +6,6 @@ server.use(cors());
 server.use(express.json());
 
 const postRoutes = require("./controllers/post");
-
 server.use("/post", postRoutes);
 
 // Root route
