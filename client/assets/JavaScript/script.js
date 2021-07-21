@@ -1,6 +1,6 @@
-const form = document.querySelector(form);
+let form = document.querySelector("form");
 
-form.addEventListener("submt", submitPost);
+form.addEventListener("submit", submitPost);
 
 function submitPost(event){
     event.preventDefault();
@@ -21,6 +21,28 @@ function submitPost(event){
        headers: { "Content-Type": "application/json" }
     };
 
-    // fetch("http://localhost:3000/post/", options)
-    //     .then()
+    fetch("http://localhost:3000/post/", options)
+        .then((r) => r.json)
+        .then(appendThought)
+}
+
+// function appendThoughts(data){
+//     data.
+// }
+
+function appendThought(thoughtData){
+    const addTitle = document.createElement("h1");
+    const addUserName = document.createElement("h3");
+    const addBody = document.createElement("p");
+
+    const test = document.querySelector("#test")
+
+    addTitle.textContent = thoughtData.title;
+    addUserName.textContent = thoughtData.username;
+    addBody.textContent = thoughtData.body;
+
+    test.append(addTitle);
+    test.append(addUserName);
+    test.append(addBody);
+    return test;
 }
