@@ -12,6 +12,17 @@ router.get("/", async (req, res) => {
   }
 });
 
+// food show route
+
+router.get("/:id", async (req, res) => {
+  try {
+    const post = await Post.findByID(parseInt(req.params.id));
+    res.json(post);
+  } catch (err) {
+    res.status(404).json({ err });
+  }
+});
+
 // // Create food route
 router.post("/", async (req, res) => {
   try {
