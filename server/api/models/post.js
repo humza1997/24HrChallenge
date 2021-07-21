@@ -35,6 +35,20 @@ class Post {
     });
   }
 
+  static findByTitle(title) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let postData = await db.query("SELECT * FROM post WHERE title = $1", [
+          title,
+        ]);
+        let post = postData.rows.map((f) => new Post(f));
+        resolve(post);
+      } catch (err) {
+        reject("That post was not found!");
+      }
+    });
+  }
+
   static create(title, username, body) {
     return new Promise(async (resolve, reject) => {
       try {

@@ -14,9 +14,19 @@ router.get("/", async (req, res) => {
 
 // food show route
 
-router.get("/:id", async (req, res) => {
+router.get("/id/:id", async (req, res) => {
   try {
     const post = await Post.findByID(parseInt(req.params.id));
+    res.json(post);
+  } catch (err) {
+    res.status(404).json({ err });
+  }
+});
+
+//food show route
+router.get("/title/:id", async (req, res) => {
+  try {
+    const post = await Post.findByTitle(req.params.id);
     res.json(post);
   } catch (err) {
     res.status(404).json({ err });
