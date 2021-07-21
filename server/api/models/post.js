@@ -21,6 +21,20 @@ class Post {
     });
   }
 
+  static findByID(id) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let postData = await db.query(`SELECT * FROM post WHERE id = $1;`, [
+          id,
+        ]);
+        let post = postData.rows.map((f) => new Post(f));
+        resolve(post);
+      } catch (err) {
+        reject("That post was not found!");
+      }
+    });
+  }
+
   static create(title, username, body) {
     return new Promise(async (resolve, reject) => {
       try {
